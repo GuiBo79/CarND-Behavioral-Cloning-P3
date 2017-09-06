@@ -1,8 +1,8 @@
-#**Behavioral Cloning** 
+# **Behavioral Cloning** 
 
-##Writeup Template
+## Writeup Template
 
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
 
 ---
 
@@ -30,12 +30,13 @@ The goals / steps of this project are the following:
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Files Submitted & Code Quality
+### Files Submitted & Code Quality
 
 ####1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
+* model_gen.py containing the script to create and trains the model with a generator implemented 
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
@@ -58,38 +59,38 @@ The model consists in a 9 layers network, 5 convolutionals layers , 3 fully conn
 
 ![alt text][image1]
 
-After normalizing using a Keras lambda layer the input (line 53) , the image is cropped, 70 pixels on the top and 25 on the bottom.
+After normalizing using a Keras lambda layer the input (line 53) , the image was cropped: 70 pixels in the top and 25 in the bottom.
+
+#### 2. Overfitting
+
+Experiments using Dropout were done to prevent overfitting, but no improvement were observed in the performance as well in the loss, so the ConvNet was completely implemented as the original AutoPilot ConvNet from NVidia.
+
+The model was trained and validated on different data sets to ensure that the model was not overfitting . The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+
+#### 3. Model parameter tuning
+
+The model used an adam optimizer, so the learning rate was not tuned manually .
+In drive.py the PI controller was fine-tunned as well a Kd parameter and derivation error were included to prevent oscilations during the autonomous drive. The proportional gain as well the integrator were tunned to perform faster , but these improvements could change the behavior of the car in the track that coud oscilate until loose control, this problem was conpensated by the introdution of the Derivative Gain.
+Turning the PI in a PID controller was very important to have a simple model with a modest data set.
+
+Some test were done with large datasets using the same model but with a Python Generator (is included as model_gen.py). After hundred of experiments the model performs much better with a smaller dataset and a fine tunned PID controler.
+
+#### 4. Appropriate training data
+
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center,left and right lane images. The angles measurements were offsetted by 0.12 in left and right images. This decision augmented the dataset by 3 times, even so the resulted dataset was duplicated again with a flipped image followed by the steer angle multiplied by -1.(lines 31 to 45)
+
+#### 5. Appropriate validation data
+
+The validation data was splitted from the orginal trainnning data in a proportion of 20%. To split the data the parameter Shuffle was turned active (True, line 73).
 
 
 
-
-####2. Attempts to reduce overfitting in the model
-
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
-
-####3. Model parameter tuning
-
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
-
-####4. Appropriate training data
-
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ... 
-
-For details about how I created the training data, see the next section. 
-
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
 ####1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy was using the powerful NVidia Autopilot ConvNet. NVidia is one of the greatest researchers in Deep Learning, so will be very tricky to concept a Neural Network thet performs better.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
-
-To combat the overfitting, I modified the model so that ...
 
 Then I ... 
 
