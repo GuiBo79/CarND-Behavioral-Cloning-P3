@@ -16,10 +16,13 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./nvidiaNN.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
+[image1]: ./examples/nvidiaNN.png "Model Visualization"
+[image2]: ./examples/center_2016_12_01_13_30_48_287.jpg
+ "Center"
+[image3]: ./examples/left_2016_12_01_13_38_52_961.jpg
+ "Left"
+[image4]: ./examples/right_2016_12_01_13_33_34_260.jpg
+ "Right"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
 [image6]: ./examples/placeholder_small.png "Normal Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
