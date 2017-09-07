@@ -1,8 +1,6 @@
 # **Behavioral Cloning** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+## Writeup 
 
 ---
 
@@ -32,7 +30,7 @@ The goals / steps of this project are the following:
 ---
 ### Files Submitted & Code Quality
 
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
 * model.py containing the script to create and train the model
@@ -41,19 +39,19 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
 
-####2. Submission includes functional code
+#### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5
 ```
 
-####3. Submission code is usable and readable
+#### 3. Submission code is usable and readable
 
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. The NVidia AutoPilot Architeture.
+#### 1. The NVidia AutoPilot Architeture.
 
 The model consists in a 9 layers network, 5 convolutionals layers , 3 fully connected and 1 normalization layer. I decided to use this ConvNet due the power to process images this network has, I just had to change the input for a 3@160X320 image.
 
@@ -87,9 +85,9 @@ The validation data was splitted from the orginal trainnning data in a proportio
 
 ### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+#### 1. Solution Design Approach
 
-The overall strategy was using the powerful NVidia Autopilot ConvNet. NVidia is one of the greatest researchers in Deep Learning, so will be very tricky to concept a Neural Network thet performs better.
+The overall strategy was using the powerful NVidia Autopilot ConvNet. NVidia is one of the greatest researchers in Deep Learning, so will be very tricky to concept a Neural Network that performs better.
 
 
 Then I ... 
@@ -98,7 +96,7 @@ The final step was to run the simulator to see how well the car was driving arou
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-####2. Final Model Architecture
+#### 2. Final Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
 
@@ -106,7 +104,7 @@ Here is a visualization of the architecture (note: visualizing the architecture 
 
 ![alt text][image1]
 
-####3. Creation of the Training Set & Training Process
+#### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
