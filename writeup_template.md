@@ -104,7 +104,7 @@ Right Image
 
 The validation data was splitted from the original trainning data in a proportion of 20%. To split the data the parameter Shuffle was turned active (True, line 73).
 
-### 6. Test and Validation Results 
+#### 6. Test and Validation Results 
 
 The performance was compare within two models, one with generator and another without. The ConvNet was rigorous the same, the only difference was the way the memory was used. To train the model I used a NVidia 930 GPU, so was possible to fit entire model without a generator.
 The final result with no generator model performed better than with generator as is possible to verify below:
@@ -117,7 +117,7 @@ Model with Generator
 
 ![alt text][image6]
 
-### 7. Conclusions 
+#### 7. Conclusions 
 
 The first interesting thing is that using the UDACITY provided dataset the loss was pretty much lower than with my recorded dataset, but curiously the driving performance , using the same drive.py and model_gen.py , was worst, actually, the car was not able to keep the track.
 
