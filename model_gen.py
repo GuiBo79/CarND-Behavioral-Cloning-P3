@@ -42,20 +42,26 @@ def generator(samples, batch_size):
                 center_image = cv2.imread(center)
                 left_image = cv2.imread(left)
                 right_image = cv2.imread(right)
-                center_angle = float(batch_sample[3])
+                
+                try:
+                    center_angle = float(batch_sample[3])
+                except Exception:
+                    center_angle = 0.0
+                    pass
+                             
                 images.append(center_image)
                 images.append(left_image)
                 images.append(right_image)
                 angles.append(center_angle)
-                angles.append(center_angle + 0.12) #left offset
-                angles.append(center_angle - 0.12) #right offset
+                angles.append(center_angle) #left offset
+                angles.append(center_angle) #right offset
 
         		
-            '''for image,measurement in zip(images,angles):
+            for image,measurement in zip(images,angles):
                 aug_images.append(image)
                 aug_images.append(cv2.flip(image,1))
                 aug_measurements.append(measurement)
-                aug_measurements.append(measurement*-1)'''
+                aug_measurements.append(measurement*-1)
 
             # trim image to only see section with road
             X_train = np.array(images)
@@ -66,14 +72,12 @@ def generator(samples, batch_size):
 train_generator = generator(train_samples, batch_size=1)
 validation_generator = generator(validation_samples, batch_size=1)
 
-row, col, ch = 160, 320, 3  # Trimmed image format
 
 model = Sequential()
 # Preprocess incoming data, centered around zero with small standard deviation 
-model.add(Lambda(lambda x: x/255 - 0.5,
-        input_shape=(row, col, ch)))
-model.add(Cropping2D(cropping=((70,25),(0,0))))
 
+model.add(Lambda(lambda x: x/127 - 1.0,input_shape=(160, 320, 3),output_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((70,25),(0,0))))
 model.add(Convolution2D(24,5,5,border_mode='valid', activation='relu', subsample=(2,2)))
 model.add(Convolution2D(36,5,5,border_mode='valid', activation='relu', subsample=(2,2)))
 model.add(Convolution2D(48,5,5,border_mode='valid', activation='relu', subsample=(2,2)))
@@ -85,11 +89,10 @@ model.add(Dense(100, activation='relu'))
 model.add(Dense(50, activation='relu'))
 model.add(Dense(10, activation='relu'))
 model.add(Dense(1, activation='tanh'))
-
-
 model.compile(loss='mse', optimizer='adam')
-historic=model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator,nb_val_samples=len(validation_samples), nb_epoch=3,verbose=1)
-
+historic=model.fit_generator(train_generator, steps_per_epoch=1000,epochs=4,verbose=1,
+                             validation_data=validation_generator,validation_steps=200)
+    
 print(historic.history.keys())
 plt.plot(historic.history['loss'])
 plt.plot(historic.history['val_loss'])
@@ -98,6 +101,9 @@ plt.ylabel('mean squared error loss')
 plt.xlabel('epoch')
 plt.legend(['training set', 'validation set'], loc='upper right')
 plt.show()
+
+
+
 
 model.save("model.h5")
 
