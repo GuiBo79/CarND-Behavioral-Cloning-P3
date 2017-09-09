@@ -85,6 +85,18 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 The training dataset was recorded with two laps. One laps zig-zaging and another center lane driving. 
 
+Center Image
+
+![alt text][image2]
+
+Left Image
+
+![alt text][image3]
+
+Right Image
+
+![alt text][image4]
+
 #### 5. Appropriate validation data
 
 The validation data was splitted from the orginal trainnning data in a proportion of 20%. To split the data the parameter Shuffle was turned active (True, line 73).
@@ -96,11 +108,11 @@ The final result with no generator model performed better than with generator as
 
 Model without Generator
 
-![alt text][image4]
+![alt text][image5]
 
 Model without Generator
 
-![alt text][image5]
+![alt text][image6]
 
 ### 7. Conclusions 
 
