@@ -23,8 +23,8 @@ The goals / steps of this project are the following:
  "Left"
 [image4]: ./examples/right_2016_12_01_13_33_34_260.jpg
  "Right"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
+[image5]: ./examples/loss.png "Loss without Generator"
+[image6]: ./examples/loss_2.png "Loss with Generator"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
 ## Rubric Points
@@ -40,6 +40,7 @@ My project includes the following files:
 * model_gen.py containing the script to create and trains the model with a generator implemented 
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
+* video.mp4 Video of using "python drive.py model.h5" command
 * writeup_report.md summarizing the results
 
 #### 2. Submission includes functional code
@@ -55,6 +56,8 @@ The model.py file contains the code for training and saving the convolution neur
 ### Model Architecture and Training Strategy
 
 #### 1. The NVidia AutoPilot Architeture.
+
+The overall strategy was using the powerful NVidia Autopilot ConvNet. NVidia is one of the greatest researchers in Deep Learning, so will be very tricky to concept a Neural Network that performs better.
 
 The model consists in a 9 layers network, 5 convolutionals layers , 3 fully connected and 1 normalization layer. I decided to use this ConvNet due the power to process images this network has, I just had to change the input for a 3@160X320 image.
 
@@ -78,59 +81,32 @@ Some test were done with large datasets using the same model but with a Python G
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center,left and right lane images. The angles measurements were offsetted by 0.12 in left and right images. This decision augmented the dataset by 3 times, even so the resulted dataset was duplicated again with a flipped image followed by the steer angle multiplied by -1.(lines 31 to 45)
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center,left and right lane images. The angles measurements were offsetted by 0.12 in left and right images. This decision augmented the dataset by 3 times, even so the resulted dataset was duplicated again with a flipped image followed by the steer angle multiplied by -1.(lines 31 to 45).
+
+The training dataset was recorded with two laps. One laps zig-zaging and another center lane driving. 
 
 #### 5. Appropriate validation data
 
 The validation data was splitted from the orginal trainnning data in a proportion of 20%. To split the data the parameter Shuffle was turned active (True, line 73).
 
+### 6. Test and Validation Results 
 
+The performance was compare within two models, one with generator and another without. The ConvNet was rigorous the same, the only difference was the way the memory was used. To train the model I used a NVidia 930 GPU, so was possible to fit entire model without a generator.
+The final result with no generator model performed better than with generator as is possible to verify below:
 
-### Model Architecture and Training Strategy
+Model without Generator
 
-#### 1. Solution Design Approach
-
-The overall strategy was using the powerful NVidia Autopilot ConvNet. NVidia is one of the greatest researchers in Deep Learning, so will be very tricky to concept a Neural Network that performs better.
-
-
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
-
-#### 2. Final Model Architecture
-
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
-
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
-
-![alt text][image1]
-
-#### 3. Creation of the Training Set & Training Process
-
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
-
-![alt text][image2]
-
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
-
-![alt text][image3]
 ![alt text][image4]
+
+Model without Generator
+
 ![alt text][image5]
 
-Then I repeated this process on track two in order to get more data points.
-
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+### 7. Conclusions 
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+
+
+
